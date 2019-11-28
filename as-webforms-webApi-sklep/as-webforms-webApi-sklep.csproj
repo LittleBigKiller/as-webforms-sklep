@@ -98,14 +98,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminPanel.aspx" />
+    <Content Include="assets\css\BasketForm\footerStyle.css" />
+    <Content Include="assets\css\BasketForm\headerStyle.css" />
+    <Content Include="assets\css\BasketForm\mainStyle.css" />
+    <Content Include="assets\css\BasketForm\productStyle.css" />
     <Content Include="assets\css\MainPage\footerStyle.css" />
     <Content Include="assets\css\MainPage\headerStyle.css" />
     <Content Include="assets\css\MainPage\mainStyle.css" />
     <Content Include="assets\css\MainPage\productStyle.css" />
-    <Content Include="assets\css\RegisterPage\registerPage.css" />
     <Content Include="assets\img\headimglow.jpg" />
     <Content Include="assets\img\image-placeholder.jpg" />
-    <Content Include="assets\img\pc_background.png" />
     <Content Include="assets\img\placeholder.png" />
     <Content Include="assets\img\tester_kabli.jfif" />
     <Content Include="BasketForm.aspx" />
@@ -116,7 +118,6 @@
     <Content Include="MainForm.aspx" />
     <Content Include="ReceiptPage.aspx" />
     <Content Include="RegisterForm.aspx" />
-    <Content Include="Verify.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -127,7 +128,6 @@
     <Compile Include="AdminPanel.aspx.designer.cs">
       <DependentUpon>AdminPanel.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Api\VerifyController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BasketForm.aspx.cs">
       <DependentUpon>BasketForm.aspx</DependentUpon>
@@ -172,13 +172,6 @@
     </Compile>
     <Compile Include="services\EmailService.cs" />
     <Compile Include="UserHandler.cs" />
-    <Compile Include="Verify.aspx.cs">
-      <DependentUpon>Verify.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Verify.aspx.designer.cs">
-      <DependentUpon>Verify.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -191,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>

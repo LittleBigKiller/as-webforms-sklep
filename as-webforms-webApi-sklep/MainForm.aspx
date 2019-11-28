@@ -40,26 +40,23 @@
                             <asp:LinkButton ID="lbToLogin" runat="server" PostBackUrl="~/LoginForm.aspx">Zaloguj się</asp:LinkButton></li>
                     </ul>
                 </div>
-                <div id="search-box">
-                    <asp:TextBox ID="tbSearch" runat="server" OnTextChanged="tbSearch_TextChanged" AutoPostBack="True" AutoCompleteType="Search"></asp:TextBox>
-                    <asp:Button ID="bSearch" runat="server" Text="Szukaj" OnClick="bSearch_Click" />
-                </div>
-                <div id="user-status">
+                <asp:Panel ID="userStatus" runat="server">
                     <asp:LinkButton ID="lbToBasket" CssClass="cart-bt" runat="server" PostBackUrl="~/BasketForm.aspx">Koszyk</asp:LinkButton>
-                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Text="Nie jesteś zalogowany."></asp:Label>
+                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Visible="False"></asp:Label>
                     <asp:Button ID="bLogout" CssClass="logout-bt" runat="server" OnClick="bLogout_Click" Text="Wyloguj" />
-                </div>
+                </asp:Panel>
+
             </div>
         </header>
 
         <main>
             <div id="categories">
-                <ul>
-                    <asp:ListView ID="lvCategories" runat="server">
-                        <ItemTemplate>
-                            <li><a href="<%# "?category=" + Eval("name") %>"> <%# Eval("name") %></a></li>
-                        </ItemTemplate>
-                    </asp:ListView>
+                <ul id="list-cats">
+                    <li>Tutaj</li>
+                    <li>Jakieś</li>
+                    <li>Kategorie</li>
+                    <li>Do</li>
+                    <li>Filtrowania</li>
                 </ul>
             </div>
             <div id="products">

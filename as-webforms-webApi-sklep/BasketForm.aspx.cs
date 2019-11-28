@@ -1,5 +1,4 @@
-﻿using as_webforms_sklep.services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -14,6 +13,36 @@ namespace as_webforms_sklep
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usertoken"] == null)
+            {
+                //Response.Redirect("LoginForm.aspx");
+                lLoggedIn.Visible = false;
+                lbToAdmin.Visible = false;
+                lbToLogin.Visible = true;
+                bLogout.Visible = false;
+                lbToRegister.Visible = true;
+                lbToLogin2.Visible = true;
+            }
+            else if (UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
+            {
+                lLoggedIn.Visible = true;
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lbToAdmin.Visible = true;
+                lbToLogin.Visible = false;
+                bLogout.Visible = true;
+                lbToRegister.Visible = false;
+                lbToLogin2.Visible = false;
+            }
+            else
+            {
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lbToAdmin.Visible = false;
+                lbToLogin.Visible = false;
+                bLogout.Visible = true;
+                lbToRegister.Visible = false;
+                lbToLogin2.Visible = false;
+            }
+
             if (Session["basket"] == null)
             {
                 Debug.WriteLine("Create new basket");
@@ -27,6 +56,38 @@ namespace as_webforms_sklep
             }
 
             calculateTotalPrice();
+            calculateBasketItemCount();
+        }
+
+        protected void bLogout_Click(object sender, EventArgs e)
+        {
+            if (Session["usertoken"] != null)
+            {
+                UserHandler.tryToLogOut(Session["usertoken"].ToString());
+                Session["usertoken"] = null;
+                Response.Redirect("BasketForm.aspx");
+            }
+        }
+
+        protected void calculateBasketItemCount()
+        {
+            List<BasketItem> basketList;
+            if (Session["basket"] == null)
+            {
+                basketList = new List<BasketItem>();
+            }
+            else
+            {
+                basketList = (List<BasketItem>)Session["basket"];
+            }
+
+            int totalAmount = 0;
+            foreach (BasketItem basketItem in basketList)
+            {
+                totalAmount += basketItem.Amount;
+            }
+
+            lbToBasket.Text = "Koszyk (" + totalAmount.ToString() + ")";
         }
 
         protected DataTable createProductList()
@@ -72,7 +133,7 @@ namespace as_webforms_sklep
                 totalPrice += basketItem.Amount * basketItem.Price;
             }
 
-            lTotalPrice.Text = "Cena wszystkich przedmiotów w koszyku to: " + totalPrice.ToString("N2") + " zł";
+            lTotalPrice.Text = "Suma:<br><b>" + totalPrice.ToString("N2") + " zł</b>";
         }
 
         protected void basketHandler(object source, RepeaterCommandEventArgs e)
@@ -106,6 +167,7 @@ namespace as_webforms_sklep
                 basketItem.Amount = amountToSet;
 
                 calculateTotalPrice();
+                calculateBasketItemCount();
             }
             else if (e.CommandName == "removeFromBasket")
             {
@@ -127,6 +189,7 @@ namespace as_webforms_sklep
                 rBasket.DataBind();
 
                 calculateTotalPrice();
+                calculateBasketItemCount();
             }
         }
 
@@ -134,7 +197,6 @@ namespace as_webforms_sklep
         {
             if (DatabaseHandler.createOrder(Session["usertoken"] == null ? "" : (string)Session["usertoken"], (List<BasketItem>)Session["basket"]))
             {
-                EmailService.ProductBought("dasdsa");
                 Session["basket"] = null;
                 Response.Redirect("ReceiptPage.aspx");
             }

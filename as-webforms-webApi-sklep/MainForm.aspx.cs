@@ -13,7 +13,7 @@ namespace as_webforms_sklep
             if (Session["usertoken"] == null)
             {
                 //Response.Redirect("LoginForm.aspx");
-                lLoggedIn.Text = "Nie jesteś zalogowany";
+                lLoggedIn.Visible = false;
                 lbToAdmin.Visible = false;
                 lbToLogin.Visible = true;
                 bLogout.Visible = false;
@@ -22,6 +22,7 @@ namespace as_webforms_sklep
             }
             else if (UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
             {
+                lLoggedIn.Visible = true;
                 lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
                 lbToAdmin.Visible = true;
                 lbToLogin.Visible = false;
@@ -43,21 +44,6 @@ namespace as_webforms_sklep
             {
                 rProducts.DataSource = DatabaseHandler.selectTable("product_info");
                 rProducts.DataBind();
-
-                lvCategories.DataSource = DatabaseHandler.selectTable("product_categories");
-                lvCategories.DataBind();
-            }
-
-            if(Request.QueryString["category"] != null)
-            {
-                string category = Request.QueryString["category"];
-                var catQuery = DatabaseHandler.selectQuery("SELECT id FROM product_categories WHERE name LIKE '" + category + "'");
-                if (catQuery.Rows.Count == 1)
-                {
-                    string catId = catQuery.Rows[0]["id"].ToString();
-                    rProducts.DataSource = DatabaseHandler.selectQuery("SELECT * FROM product_info WHERE category LIKE '" + catId + "'");
-                    rProducts.DataBind();
-                }
             }
 
             if (Session["basket"] == null)
@@ -157,22 +143,6 @@ namespace as_webforms_sklep
                 Debug.WriteLine("amount: " + basketItem.Amount.ToString());
                 Debug.WriteLine("=====");
             }
-        }
-
-        void doSearch()
-        {
-            rProducts.DataSource = DatabaseHandler.selectQuery(string.Format("SELECT * FROM product_info WHERE name LIKE '%{0}%' OR (SELECT name FROM product_categories WHERE id LIKE category) LIKE '%{0}%' OR description LIKE '%{0}%' OR supplier LIKE '%{0}%'", tbSearch.Text));
-            rProducts.DataBind();
-        }
-
-        protected void tbSearch_TextChanged(object sender, EventArgs e)
-        {
-            doSearch();
-        }
-
-        protected void bSearch_Click(object sender, EventArgs e)
-        {
-            doSearch();
         }
     }
 }
