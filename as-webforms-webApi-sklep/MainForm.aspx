@@ -58,7 +58,7 @@
                 <ul>
                     <asp:ListView ID="lvCategories" runat="server">
                         <ItemTemplate>
-                            <li><a href="<%# "?category=" + Eval("name") %>"> <%# Eval("name") %></a></li>
+                            <li class="category-bt"><a href="<%# "?category=" + Eval("name") %>"> <%# Eval("name") %></a></li>
                         </ItemTemplate>
                     </asp:ListView>
                 </ul>
