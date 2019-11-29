@@ -21,9 +21,9 @@ namespace as_webforms_sklep
                 lbToRegister.Visible = true;
                 lbToLogin2.Visible = true;
             }
-            else if (UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
+            else if (UserHelper.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHelper.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
             {
-                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHelper.getUsername(Session["usertoken"].ToString()) + "</b>";
                 lbToAdmin.Visible = true;
                 lbToLogin.Visible = false;
                 bLogout.Visible = true;
@@ -32,7 +32,7 @@ namespace as_webforms_sklep
             }
             else
             {
-                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHelper.getUsername(Session["usertoken"].ToString()) + "</b>";
                 lbToAdmin.Visible = false;
                 lbToLogin.Visible = false;
                 bLogout.Visible = true;
@@ -42,10 +42,10 @@ namespace as_webforms_sklep
 
             if (!IsPostBack)
             {
-                rProducts.DataSource = DatabaseHandler.selectTable("product_info");
+                rProducts.DataSource = DatabaseHelper.selectTable("product_info");
                 rProducts.DataBind();
 
-                DataTable cats = DatabaseHandler.selectTable("product_categories");
+                DataTable cats = DatabaseHelper.selectTable("product_categories");
                 DataRow catAll = cats.NewRow();
                 catAll["name"] = "Wszystkie";
                 cats.Rows.InsertAt(catAll, 0);
@@ -57,11 +57,11 @@ namespace as_webforms_sklep
             if(Request.QueryString["category"] != null && Request.QueryString["category"] != "Wszystkie")
             {
                 string category = Request.QueryString["category"];
-                var catQuery = DatabaseHandler.selectQuery("SELECT id FROM product_categories WHERE name LIKE '" + category + "'");
+                var catQuery = DatabaseHelper.selectQuery("SELECT id FROM product_categories WHERE name LIKE '" + category + "'");
                 if (catQuery.Rows.Count == 1)
                 {
                     string catId = catQuery.Rows[0]["id"].ToString();
-                    rProducts.DataSource = DatabaseHandler.selectQuery("SELECT * FROM product_info WHERE category LIKE '" + catId + "'");
+                    rProducts.DataSource = DatabaseHelper.selectQuery("SELECT * FROM product_info WHERE category LIKE '" + catId + "'");
                     rProducts.DataBind();
                 }
             }
@@ -69,7 +69,7 @@ namespace as_webforms_sklep
             if (Session["basket"] == null)
             {
                 Debug.WriteLine("Create new basket");
-                Session["basket"] = new List<BasketItem>();
+                Session["basket"] = new List<ShopItem>();
             }
 
             calculateBasketItemCount();
@@ -79,7 +79,7 @@ namespace as_webforms_sklep
         {
             if (Session["usertoken"] != null)
             {
-                UserHandler.tryToLogOut(Session["usertoken"].ToString());
+                UserHelper.tryToLogOut(Session["usertoken"].ToString());
                 Session["usertoken"] = null;
                 Response.Redirect("MainForm.aspx");
             }
@@ -87,18 +87,18 @@ namespace as_webforms_sklep
 
         protected void calculateBasketItemCount()
         {
-            List<BasketItem> basketList;
+            List<ShopItem> basketList;
             if (Session["basket"] == null)
             {
-                basketList = new List<BasketItem>();
+                basketList = new List<ShopItem>();
             }
             else
             {
-                basketList = (List<BasketItem>)Session["basket"];
+                basketList = (List<ShopItem>)Session["basket"];
             }
 
             int totalAmount = 0;
-            foreach (BasketItem basketItem in basketList)
+            foreach (ShopItem basketItem in basketList)
             {
                 totalAmount += basketItem.Amount;
             }
@@ -111,14 +111,14 @@ namespace as_webforms_sklep
             Debug.WriteLine("YEET");
             if (e.CommandName == "addToBasket")
             {
-                List<BasketItem> basketList;
+                List<ShopItem> basketList;
                 if (Session["basket"] == null)
                 {
-                    basketList = new List<BasketItem>();
+                    basketList = new List<ShopItem>();
                 }
                 else
                 {
-                    basketList = (List<BasketItem>)Session["basket"];
+                    basketList = (List<ShopItem>)Session["basket"];
                 }
 
                 int amountToAdd = 1;
@@ -145,11 +145,11 @@ namespace as_webforms_sklep
                     Debug.WriteLine("/u/1R0NYMAN happened");
                 }
 
-                BasketItem basketItem = basketList.Find(item => item.ProductId == (e.CommandArgument.ToString()));
+                ShopItem basketItem = basketList.Find(item => item.ProductId == (e.CommandArgument.ToString()));
 
                 if (basketItem == null)
                 {
-                    basketItem = new BasketItem(e.CommandArgument.ToString(), amountToAdd, itemPrice);
+                    basketItem = new ShopItem(e.CommandArgument.ToString(), amountToAdd, itemPrice);
                     basketList.Add(basketItem);
                 }
                 else
@@ -167,7 +167,7 @@ namespace as_webforms_sklep
 
         void doSearch()
         {
-            rProducts.DataSource = DatabaseHandler.selectQuery(string.Format("SELECT * FROM product_info WHERE name LIKE '%{0}%' OR (SELECT name FROM product_categories WHERE id LIKE category) LIKE '%{0}%' OR description LIKE '%{0}%' OR supplier LIKE '%{0}%'", tbSearch.Text));
+            rProducts.DataSource = DatabaseHelper.selectQuery(string.Format("SELECT * FROM product_info WHERE name LIKE '%{0}%' OR (SELECT name FROM product_categories WHERE id LIKE category) LIKE '%{0}%' OR description LIKE '%{0}%' OR supplier LIKE '%{0}%'", tbSearch.Text));
             rProducts.DataBind();
         }
 

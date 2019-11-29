@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace as_webforms_sklep
 {
-    public static class DatabaseHandler
+    public static class DatabaseHelper
     {
         private const string connString =
                "SERVER=inf16.tl.krakow.pl;" +
@@ -50,7 +50,6 @@ namespace as_webforms_sklep
             return selectQuery("SELECT * FROM " + tableName);
         }
 
-        // Wszystkie modyfikacje danych chyba najlepiej robić transakcjami
         public class Transaction
         {
             private MySqlConnection conn;
@@ -61,9 +60,22 @@ namespace as_webforms_sklep
                 new MySqlCommand("BEGIN", conn).ExecuteNonQuery();
             }
 
+            public void rollback()
+            {
+                new MySqlCommand("ROLLBACK", conn).ExecuteNonQuery();
+                conn.Close();
+            }
+
             public int executeCommand(string cmd)
             {
-                return new MySqlCommand(cmd, conn).ExecuteNonQuery();
+                try
+                {
+                    return new MySqlCommand(cmd, conn).ExecuteNonQuery();
+                }
+                catch
+                {
+                    return -1;
+                }
             }
 
             public void commit()
@@ -71,11 +83,54 @@ namespace as_webforms_sklep
                 new MySqlCommand("COMMIT", conn).ExecuteNonQuery();
                 conn.Close();
             }
+        }
 
-            public void rollback()
+        public static bool createOrder(string userToken, List<ShopItem> basket)
+        {
+            int userId = UserHelper.getUserId(userToken);
+            var orderIdQuery = selectQuery("SELECT MAX(id) as maxid FROM orders");
+            int orderId;
+            if (orderIdQuery.Rows.Count > 0)
+                orderId = int.Parse(orderIdQuery.Rows[0]["maxid"].ToString()) + 1;
+            else
+                orderId = 0;
+
+            var dt = DateTime.Now;
+            string datetime = string.Format("{0}-{1}-{2} {3}:{4}:{5}", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
+            var transaction = new Transaction();
+            int orderRecords = transaction.executeCommand("INSERT INTO orders (id, user, datetime, state) VALUES ('" + orderId.ToString() + "', '" + userId.ToString() + "', '" + datetime + "', '0')");
+
+            int orderContentRecords = 0;
+            foreach (var item in basket)
             {
-                new MySqlCommand("ROLLBACK", conn).ExecuteNonQuery();
-                conn.Close();
+                orderContentRecords += transaction.executeCommand("INSERT INTO order_contents (order_id, product_id, quantity) VALUES('" + orderId.ToString() + "', '" + item.ProductId + "', '" + item.Amount.ToString() + "')");
+            }
+
+            if (orderRecords == 1 && orderContentRecords == basket.Count)
+            {
+                transaction.commit();
+                return true;
+            }
+            else
+            {
+                transaction.rollback();
+                return false;
+            }
+        }
+
+        public static bool updateVerificationStatus(string id)
+        {
+            var transaction = new Transaction();
+            int affectedRecords = transaction.executeCommand("UPDATE user_data SET verified=1 WHERE user_id='" + id + "'");
+            if (affectedRecords == 1)
+            {
+                transaction.commit();
+                return true;
+            }
+            else
+            {
+                transaction.rollback();
+                return false;
             }
         }
 
@@ -131,54 +186,6 @@ namespace as_webforms_sklep
         {
             var transaction = new Transaction();
             int affectedRecords = transaction.executeCommand("INSERT INTO product_info (category, name, img_path, description, price, supplier) VALUES ('" + category + "', '" + name + "', '" + imp_path + "', '" + description + "', '" + price + "', '" + supplier + "')");
-            if (affectedRecords == 1)
-            {
-                transaction.commit();
-                return true;
-            }
-            else
-            {
-                transaction.rollback();
-                return false;
-            }
-        }
-
-        public static bool createOrder(string userToken, List<BasketItem> basket)
-        {
-            int userId = UserHandler.getUserId(userToken);
-            var orderIdQuery = selectQuery("SELECT MAX(id) as maxid FROM orders");
-            int orderId;
-            if (orderIdQuery.Rows.Count > 0)
-                orderId = int.Parse(orderIdQuery.Rows[0]["maxid"].ToString()) + 1;
-            else
-                orderId = 0;
-
-            var dt = DateTime.Now;
-            string datetime = string.Format("{0}-{1}-{2} {3}:{4}:{5}", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
-            var transaction = new Transaction();
-            int orderRecords = transaction.executeCommand("INSERT INTO orders (id, user, datetime, state) VALUES ('" + orderId.ToString() + "', '" + userId.ToString() + "', '" + datetime + "', '0')");
-
-            int orderContentRecords = 0;
-            foreach (var item in basket)
-            {
-                orderContentRecords += transaction.executeCommand("INSERT INTO order_contents (order_id, product_id, quantity) VALUES('" + orderId.ToString() + "', '" + item.ProductId + "', '" + item.Amount.ToString() + "')");
-            }
-
-            if(orderRecords == 1 && orderContentRecords == basket.Count)
-            {
-                transaction.commit();
-                return true;
-            } else
-            {
-                transaction.rollback();
-                return false;
-            }
-        }
-
-        public static bool updateVerificationStatus(string id)
-        {
-            var transaction = new Transaction();
-            int affectedRecords = transaction.executeCommand("UPDATE user_data SET verified=1 WHERE user_id='" + id + "'");
             if (affectedRecords == 1)
             {
                 transaction.commit();

@@ -81,7 +81,7 @@
                                 <div class="prod-spec-box">
                                     <div class="prod-spec">
                                         <p class="spec-title">Specyfikacja</p>
-                                        <p class="spec-text">Kategoria: <%# as_webforms_sklep.DatabaseHandler.selectQuery("SELECT name FROM product_categories WHERE id LIKE '" + Eval("category").ToString() + "'").Rows[0]["name"] %></p>
+                                        <p class="spec-text">Kategoria: <%# as_webforms_sklep.DatabaseHelper.selectQuery("SELECT name FROM product_categories WHERE id LIKE '" + Eval("category").ToString() + "'").Rows[0]["name"] %></p>
                                         <p class="spec-text">
                                            <span class="desc-box"> Opis: <%# Eval("description") %> </span>
                                         </p>

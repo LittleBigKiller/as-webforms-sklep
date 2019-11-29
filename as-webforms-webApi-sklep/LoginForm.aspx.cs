@@ -24,9 +24,9 @@ namespace as_webforms_sklep
                 lbToRegister.Visible = true;
                 lbToLogin2.Visible = true;
             }
-            else if (UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
+            else if (UserHelper.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHelper.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
             {
-                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHelper.getUsername(Session["usertoken"].ToString()) + "</b>";
                 lbToAdmin.Visible = true;
                 lbToLogin.Visible = false;
                 bLogout.Visible = true;
@@ -35,7 +35,7 @@ namespace as_webforms_sklep
             }
             else
             {
-                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHelper.getUsername(Session["usertoken"].ToString()) + "</b>";
                 lbToAdmin.Visible = false;
                 lbToLogin.Visible = false;
                 bLogout.Visible = true;
@@ -46,7 +46,7 @@ namespace as_webforms_sklep
             if (Session["basket"] == null)
             {
                 Debug.WriteLine("Create new basket");
-                Session["basket"] = new List<BasketItem>();
+                Session["basket"] = new List<ShopItem>();
             }
 
             calculateBasketItemCount();
@@ -56,7 +56,7 @@ namespace as_webforms_sklep
         {
             if (Session["usertoken"] != null)
             {
-                UserHandler.tryToLogOut(Session["usertoken"].ToString());
+                UserHelper.tryToLogOut(Session["usertoken"].ToString());
                 Session["usertoken"] = null;
                 Response.Redirect("MainForm.aspx");
             }
@@ -64,18 +64,18 @@ namespace as_webforms_sklep
 
         protected void calculateBasketItemCount()
         {
-            List<BasketItem> basketList;
+            List<ShopItem> basketList;
             if (Session["basket"] == null)
             {
-                basketList = new List<BasketItem>();
+                basketList = new List<ShopItem>();
             }
             else
             {
-                basketList = (List<BasketItem>)Session["basket"];
+                basketList = (List<ShopItem>)Session["basket"];
             }
 
             int totalAmount = 0;
-            foreach (BasketItem basketItem in basketList)
+            foreach (ShopItem basketItem in basketList)
             {
                 totalAmount += basketItem.Amount;
             }
@@ -85,7 +85,7 @@ namespace as_webforms_sklep
 
         protected void bLogIn_Click(object sender, EventArgs e)
         {
-            string token = UserHandler.tryToLogIn(tbUsername.Text, tbPassword.Text);
+            string token = UserHelper.tryToLogIn(tbUsername.Text, tbPassword.Text);
             if (token == "fail")
             {
                 lMsg.Text = "Nieprawidłowy login lub hasło.";
