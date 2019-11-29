@@ -104,6 +104,7 @@
     <Content Include="assets\css\MainPage\mainStyle.css" />
     <Content Include="assets\css\BasketForm\productStyle.css" />
     <Content Include="assets\css\MainPage\productStyle.css" />
+    <Content Include="assets\css\RegisterPage\mainStyle.css" />
     <Content Include="assets\css\RegisterPage\registerPage.css" />
     <Content Include="assets\img\headimglow.jpg" />
     <Content Include="assets\img\image-placeholder.jpg" />

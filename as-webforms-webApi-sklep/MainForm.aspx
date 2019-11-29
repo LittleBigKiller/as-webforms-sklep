@@ -55,6 +55,7 @@
 
         <main>
             <div id="categories">
+                <p id="cat-tit">Kategorie gier</p>
                 <ul>
                     <asp:ListView ID="lvCategories" runat="server">
                         <ItemTemplate>
