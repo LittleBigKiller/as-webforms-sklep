@@ -7,9 +7,9 @@
     <meta charset="UTF-8" />
     <title>Sklep</title>
     <link href="~/assets/css/MainPage/productStyle.css" rel="stylesheet" />
-    <link href="~/assets/css/MainPage/headerStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/common/headerStyle.css" rel="stylesheet" />
     <link href="~/assets/css/MainPage/mainStyle.css" rel="stylesheet" />
-    <link href="~/assets/css/MainPage/footerStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/common/footerStyle.css" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -44,11 +44,11 @@
                     <asp:TextBox ID="tbSearch" runat="server" OnTextChanged="tbSearch_TextChanged" AutoPostBack="True" AutoCompleteType="Search"></asp:TextBox>
                     <asp:Button ID="bSearch" runat="server" Text="Szukaj" OnClick="bSearch_Click" />
                 </div>
-                <div id="user-status">
+                <asp:Panel ID="userStatus" runat="server">
                     <asp:LinkButton ID="lbToBasket" CssClass="cart-bt" runat="server" PostBackUrl="~/BasketForm.aspx">Koszyk</asp:LinkButton>
-                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Text="Nie jesteś zalogowany."></asp:Label>
+                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Visible="True">Nie jesteś zalogowany</asp:Label>
                     <asp:Button ID="bLogout" CssClass="logout-bt" runat="server" OnClick="bLogout_Click" Text="Wyloguj" />
-                </div>
+                </asp:Panel>
             </div>
         </header>
 
@@ -121,7 +121,7 @@
                 <div id="info">
                     <p>Kontakt</p>
                     <span>Telefon: +48 123 456 789</span>
-                    <span>Mail: sklepinternetowy@sklep.pl</span>
+                    <span>Mail: mirabelki.sklep@gmail.com</span>
                     <span>Adres: ul. Sklepowa 4/20, 32-137 Koszyce</span>
                 </div>
             </div>

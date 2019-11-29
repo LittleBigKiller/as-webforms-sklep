@@ -6,9 +6,9 @@
 <head runat="server">
     <title>Koszyk</title>
     <link href="~/assets/css/BasketForm/productStyle.css" rel="stylesheet" />
-    <link href="~/assets/css/BasketForm/headerStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/common/headerStyle.css" rel="stylesheet" />
     <link href="~/assets/css/BasketForm/mainStyle.css" rel="stylesheet" />
-    <link href="~/assets/css/BasketForm/footerStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/common/footerStyle.css" rel="stylesheet" />
     <style>
         * {
             margin: 0;
