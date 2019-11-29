@@ -23,6 +23,12 @@
 
         </header>
         <br />
+<%--        <ul id="menu">
+            <li id="prod"><a>Produkty</a></li>
+            <li id="users"><a>Użytkownicy</a></li>
+            <li id="orders"><a>Zamówienia</a></li>
+            <li id="add-prod"><a>Dodaj produkt</a></li>
+        </ul>--%>
         <asp:Label ID="lTest" runat="server" ForeColor="Red"></asp:Label>
         <div style="display: flex; justify-content: space-evenly; align-items: flex-start; flex-direction: row;">
             <asp:GridView ID="gvUsers" AutoGenerateColumns="false" runat="server" OnRowCommand="gvUsers_RowCommand" DataKeyNames="id" Style="background-color: #ffffff; color: #000000">
