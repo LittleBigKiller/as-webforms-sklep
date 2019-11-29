@@ -32,10 +32,5 @@ namespace as_webforms_sklep
                 }
             }
         }
-
-        protected void bGotToLogIn_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("LoginForm.aspx");
-        }
     }
 }

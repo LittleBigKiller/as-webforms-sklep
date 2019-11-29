@@ -22,15 +22,5 @@ namespace as_webforms_sklep
                 Response.Redirect("MainForm.aspx");
             }
         }
-
-        protected void bGoToRegister_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("RegisterForm.aspx");
-        }
-
-        protected void btToMainForm_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("MainForm.aspx");
-        }
     }
 }
