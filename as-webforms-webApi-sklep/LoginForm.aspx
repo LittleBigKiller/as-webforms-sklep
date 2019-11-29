@@ -30,8 +30,8 @@
                     </div>
                     <div class="form-line-tall">
                         <div class="small-container"><asp:Button ID="bLogIn" runat="server" Text="Zaloguj" OnClick="bLogIn_Click" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White"/></div>
-                        <div class="small-container"><asp:Button ID="bGoToRegister" runat="server" Text="Rejestracja" OnClick="bGoToRegister_Click" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White"/></div>
-                        <div class="small-container"><asp:Button ID="btToMainForm" runat="server" OnClick="btToMainForm_Click" Text="Strona główna" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White"/></div>
+                        <div class="small-container"><asp:Button ID="bGoToRegister" runat="server" Text="Rejestracja" PostBackUrl="~/RegisterForm.aspx" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White"/></div>
+                        <div class="small-container"><asp:Button ID="btToMainForm" runat="server" PostBackUrl="~/MainForm.aspx" Text="Strona główna" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White"/></div>
                         <div class="small-container"><asp:Label ID="lMsg" runat="server" ForeColor="Red"></asp:Label></div>
                     </div>
                 </div>

@@ -79,7 +79,8 @@
                     </div>
                     <div class="form-line-tall">
                         <div class="small-container"><asp:Button ID="bRegister" runat="server" Text="Zarejestruj się" OnClick="bRegister_Click" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" /></div>
-                        <div class="small-container"><asp:Button ID="bGotToLogIn" runat="server" Text="Logowanie" CausesValidation="False" OnClick="bGotToLogIn_Click" UseSubmitBehavior="False" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" /></div>
+                        <div class="small-container"><asp:Button ID="bGotToLogIn" runat="server" Text="Logowanie" PostBackUrl="~/LoginForm.aspx" CausesValidation="False" UseSubmitBehavior="False" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" /></div>
+                        <div class="small-container"><asp:Button ID="btToMainForm" runat="server" PostBackUrl="~/MainForm.aspx" Text="Strona główna" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White"/></div>
                         <div class="small-container"><asp:Label ID="Label1" runat="server" ForeColor="Red" Text="* Pola wymagane"></asp:Label></div>
                         <div class="small-container"><asp:Label ID="lMsg" runat="server" ForeColor="Red"></asp:Label></div>
                     </div>
