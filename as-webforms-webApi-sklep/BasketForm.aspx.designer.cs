@@ -24,13 +24,13 @@ namespace as_webforms_sklep
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Kontrolka LinkButton1.
+        /// Kontrolka lbToMainPage.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton lbToMainPage;
 
         /// <summary>
         /// Kontrolka lbToRegister.
@@ -186,13 +186,13 @@ namespace as_webforms_sklep
         protected global::System.Web.UI.WebControls.LinkButton lbToBasket2;
 
         /// <summary>
-        /// Kontrolka lbToMainPage.
+        /// Kontrolka lbToMainPage2.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbToMainPage;
+        protected global::System.Web.UI.WebControls.LinkButton lbToMainPage2;
 
         /// <summary>
         /// Kontrolka lbToContact.

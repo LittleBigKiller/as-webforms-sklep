@@ -31,7 +31,8 @@
             <div id="menu">
                 <div id="menu-list-box">
                     <ul id="menu-list">
-                        <li>Produkty </li>
+                        <li>
+                            <asp:LinkButton ID="lbToMainPage" runat="server" PostBackUrl="~/MainForm.aspx">Strona główna</asp:LinkButton></li>
                         <li>
                             <asp:LinkButton ID="lbToRegister" runat="server" PostBackUrl="~/RegisterForm.aspx" Visible="True">Rejestracja</asp:LinkButton></li>
                         <li>
@@ -114,7 +115,7 @@
                     </div>
                     <div id="sklep">
                         <p>Sklep</p>
-                        <asp:LinkButton ID="lbToMainPage" runat="server" PostBackUrl="~/MainForm.aspx">Strona główna</asp:LinkButton>
+                        <asp:LinkButton ID="lbToMainPage2" runat="server" PostBackUrl="~/MainForm.aspx">Strona główna</asp:LinkButton>
                         <asp:LinkButton ID="lbToContact" runat="server" PostBackUrl="~/MainForm.aspx">Kontakt</asp:LinkButton>
                     </div>
                 </div>
