@@ -1,43 +1,59 @@
 main {
-    min-width: 1350px;
+    min-height: 650px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto;
     color: white;
 }
 
-#categories {
-    width: 15%;
-    margin-right: 5px;
-    border: 2px solid #888;
-}
-
-#products {
-    min-height: 600px;
-    width: 84%;
+.text-container {
+    margin: 0 auto;
+    text-align: center;
     display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#list-cats li {
-    display: block;
-    padding: 10px;
-    border-bottom: 1px solid #888;
-    border-collapse: collapse;
-}
-
-#order-box {
-    flex: 1;
-    background: #808080;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+    font-size: 22px;
+    min-width: 400px;
+    max-width: 500px;
     padding: 5px;
-    min-width: 235px;
 }
 
-#lTotalPrice, #lbToMain, #bOrder {
-    display: block;
-}
+    .text-container input {
+        margin-right: 10px;
+        height: 24px;
+        width: 170px;
+    }
 
-#lTotalPrice {
-    font-size: 26px;
+    .text-container span {
+        position: absolute;
+    }
+
+    .text-container * {
+        display: inline-block;
+    }
+
+.small-container {
+    text-align: center;
     display: inline-block;
+    padding: 5px;
+}
+
+#bRegister {
+    width: 240px;
+    height: 39px;
+}
+
+    .small-container * {
+        width: 150px;
+        height: 26px;
+        text-align: center;
+        display: inline-block;
+    }
+
+#bBox {
+    display: flex;
+    flex-direction: column;
 }

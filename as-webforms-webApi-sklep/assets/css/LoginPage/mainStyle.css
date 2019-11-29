@@ -35,6 +35,11 @@ main{
     height: 24px;
 }
 
+#bLogIn {
+    width: 240px;
+    height: 38px;
+}
+
 #bt-container {
     display: flex;
     flex-direction: column;
