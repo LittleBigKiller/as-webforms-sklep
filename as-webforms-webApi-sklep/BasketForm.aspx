@@ -42,7 +42,7 @@
                 </div>
                 <asp:Panel ID="userStatus" runat="server">
                     <asp:LinkButton ID="lbToBasket" CssClass="cart-bt" runat="server" PostBackUrl="~/BasketForm.aspx">Koszyk</asp:LinkButton>
-                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Visible="False"></asp:Label>
+                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Visible="True">Nie jesteś zalogowany</asp:Label>
                     <asp:Button ID="bLogout" CssClass="logout-bt" runat="server" OnClick="bLogout_Click" Text="Wyloguj" />
                 </asp:Panel>
 
