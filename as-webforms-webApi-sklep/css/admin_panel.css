@@ -208,55 +208,41 @@ li.fancyTab.active a {
   display: block;
 }
 
-@media (max-width: 1200px) {
-  
-  .fancyTab .fa {
-  	font-size: 36px;
-  }
-  
-  .fancyTab .hidden-xs {
-    font-size:22px;
-	}
-		
+/*#gvOrders, #gvProducts, #gvUsers, .newProduct {
+    position: absolute;
+    top: 175px;
+    left: 20vw;
+    width: 60vw;
+    min-width: 900px;
+    display: none;
 }
-	
-	
-@media (max-width: 992px) {
-    
-  .fancyTab .fa {
-  	font-size: 33px;
-  }
-    
-  .fancyTab .hidden-xs {
-  	font-size:18px;
-    font-weight:normal;
-  }
-		
+
+#menu {
+    position: absolute;
+    top: 130px;
+    left: 20vw;
+    width: 60vw;
+    height:45px;
+    min-width: 900px;
+    border: 2px red solid;
+    box-sizing: border-box;
 }
-	
-	
-@media (max-width: 768px) {
-    
-  .fancyTab > a {
-    font-size:18px;
-  }
-    
-  .nav > li.fancyTab > a {
-    padding:15px 0;
-    margin-bottom:inherit;
-  }
-    
-  .fancyTab .fa {
-    font-size:30px;
-  }
-    
-  .nav-tabs > li.fancyTab > a {
-    border-right:1px solid transparent;
-    padding-bottom:0;
-  }
-    
-  .fancyTab.active .fa {
-    color: #333;
-	}
-		
+
+#menu li{
+    display: inline-block;
+    width: 20%;
+    padding:0 2.5%;
+    font-size: 24px;
 }
+
+#prod a:hover #gvProducts {
+    display: block;
+}
+
+
+#prod:hover #gvOrders, #gvUsers, .newProduct {
+    display: none;
+}
+#users{}
+#orders{}
+#add-prod{}*/
