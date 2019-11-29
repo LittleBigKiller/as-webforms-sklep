@@ -38,11 +38,11 @@ namespace as_webforms_sklep.services
                     idTrue = id.Rows[0]["id"].ToString();
                 Debug.WriteLine(idTrue);
                 Debug.WriteLine(username);
-                mm.Subject = "Account Activation";
-                string body = "Hello " + username + ",";
-                body += "<br /><br />Please click the following link to activate your account";
-                body += "<br /><a href = 'http://localhost:54291/Verify.aspx/?ActivationCode=" + idTrue + "'> Click here to activate your account. </a>";
-                body += "<br /><br />Thanks";
+                mm.Subject = "Weryfikacja konta Mirabelki";
+                string body = "Witaj " + username + ",";
+                body += "<br /><br />Proszę kliknij poniższy link, aby zweryfikować swoje konto";
+                body += "<br /><a href = 'http://localhost:54291/Verify.aspx/?ActivationCode=" + idTrue + "'> Kliknij tutaj. </a>";
+                body += "<br /><br />Dziękujemy i miłych zakupów, <br> Zespół Mirabelki";
                 mm.Body = body;
                 mm.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
