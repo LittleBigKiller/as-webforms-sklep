@@ -69,6 +69,7 @@ namespace as_webforms_sklep
             {
                 UserHelper.tryToLogOut(Session["usertoken"].ToString());
                 Session["usertoken"] = null;
+                Session["basket"] = null;
                 Response.Redirect("MainForm.aspx");
             }
         }
