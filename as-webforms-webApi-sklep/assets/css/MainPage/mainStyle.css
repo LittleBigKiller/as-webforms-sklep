@@ -25,15 +25,38 @@ main {
     border-collapse: collapse;
 }
 
-.category-bt {
-    width:100%;
-    text-align: center;
-    min-height: 40px;
-    font-size: 24px;
-    list-style: none;
+#categories ul {
+    padding-top: 5px;
 }
 
-.category-bt a{
-    text-decoration: none;
-    color: white;
+#categories {
+    min-width: 215px;
+}
+
+.category-bt {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    min-height: 45px;
+    font-size: 24px;
+    list-style: none;
+    border-bottom: 1px solid #888;
+}
+
+    .category-bt a {
+        padding-top: 4px;
+        box-sizing: border-box;
+        display: block;
+        text-decoration: none;
+        min-height: 44px;
+        color: white;
+        width: 100%;
+        height: 100%;
+    }
+
+#cat-tit {
+    border-bottom: 2px solid #888;
+    font-size: 32px;
+    text-align: center;
+    padding: 5px 0;
 }
