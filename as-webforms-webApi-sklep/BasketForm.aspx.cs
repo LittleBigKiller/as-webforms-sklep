@@ -14,11 +14,36 @@ namespace as_webforms_sklep
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["usertoken"] == null)
+
+            if (Session["usertoken"] == null)
             {
+                //Response.Redirect("LoginForm.aspx");
                 tbEmail.Enabled = true;
-            } else
+                lLoggedIn.Text = "Nie jesteś zalogowany";
+                lbToAdmin.Visible = false;
+                lbToLogin.Visible = true;
+                bLogout.Visible = false;
+                lbToRegister.Visible = true;
+                lbToLogin2.Visible = true;
+            }
+            else if (UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
             {
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lbToAdmin.Visible = true;
+                lbToLogin.Visible = false;
+                bLogout.Visible = true;
+                lbToRegister.Visible = false;
+                lbToLogin2.Visible = false;
+                tbEmail.Text = UserHandler.getUserData(Session["usertoken"].ToString()).Rows[0]["email"].ToString();
+            }
+            else
+            {
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lbToAdmin.Visible = false;
+                lbToLogin.Visible = false;
+                bLogout.Visible = true;
+                lbToRegister.Visible = false;
+                lbToLogin2.Visible = false;
                 tbEmail.Text = UserHandler.getUserData(Session["usertoken"].ToString()).Rows[0]["email"].ToString();
             }
 
@@ -35,6 +60,38 @@ namespace as_webforms_sklep
             }
 
             calculateTotalPrice();
+            calculateBasketItemCount();
+        }
+
+        protected void bLogout_Click(object sender, EventArgs e)
+        {
+            if (Session["usertoken"] != null)
+            {
+                UserHandler.tryToLogOut(Session["usertoken"].ToString());
+                Session["usertoken"] = null;
+                Response.Redirect("MainForm.aspx");
+            }
+        }
+
+        protected void calculateBasketItemCount()
+        {
+            List<BasketItem> basketList;
+            if (Session["basket"] == null)
+            {
+                basketList = new List<BasketItem>();
+            }
+            else
+            {
+                basketList = (List<BasketItem>)Session["basket"];
+            }
+
+            int totalAmount = 0;
+            foreach (BasketItem basketItem in basketList)
+            {
+                totalAmount += basketItem.Amount;
+            }
+
+            lbToBasket.Text = "Koszyk (" + totalAmount.ToString() + ")";
         }
 
         protected DataTable createProductList()
@@ -80,7 +137,9 @@ namespace as_webforms_sklep
                 totalPrice += basketItem.Amount * basketItem.Price;
             }
 
-            lTotalPrice.Text = "Cena wszystkich przedmiotów w koszyku to: " + totalPrice.ToString("N2") + " zł";
+            lTotalPrice.Text = "Suma: " + totalPrice.ToString("N2") + " zł";
+
+            calculateBasketItemCount();
         }
 
         protected void basketHandler(object source, RepeaterCommandEventArgs e)
@@ -114,6 +173,7 @@ namespace as_webforms_sklep
                 basketItem.Amount = amountToSet;
 
                 calculateTotalPrice();
+                calculateBasketItemCount();
             }
             else if (e.CommandName == "removeFromBasket")
             {
@@ -135,6 +195,7 @@ namespace as_webforms_sklep
                 rBasket.DataBind();
 
                 calculateTotalPrice();
+                calculateBasketItemCount();
             }
         }
 
