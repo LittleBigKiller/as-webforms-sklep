@@ -15,8 +15,8 @@ namespace as_webforms_sklep.services
         {
             using (MailMessage mm = new MailMessage("mirabelki.sklep@gmail.com", email))
             {
-                mm.Subject = "Dziękujemy za zakup w naszym sklepie";
-                mm.Body = "Dziękujemy za zakup w naszym sklepie, transakcja została wykonana pomyślnie ";
+                mm.Subject = "Zamówienie - Sklep Mirabelki";
+                mm.Body = "Dziękujemy za zakupy w naszym sklepie, zamówienie zostało przyjęte";
                 mm.IsBodyHtml = false;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
