@@ -91,6 +91,8 @@ namespace as_webforms_sklep
                 totalAmount += basketItem.Amount;
             }
 
+            bOrder.Enabled = totalAmount > 0;
+
             lbToBasket.Text = "Koszyk (" + totalAmount.ToString() + ")";
         }
 
