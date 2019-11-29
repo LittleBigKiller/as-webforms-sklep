@@ -24,23 +24,9 @@ namespace as_webforms_sklep
                 lbToRegister.Visible = true;
                 lbToLogin2.Visible = true;
             }
-            else if (UserHelper.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHelper.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
-            {
-                lLoggedIn.Text = "Zalogowano jako <b>" + UserHelper.getUsername(Session["usertoken"].ToString()) + "</b>";
-                lbToAdmin.Visible = true;
-                lbToLogin.Visible = false;
-                bLogout.Visible = true;
-                lbToRegister.Visible = false;
-                lbToLogin2.Visible = false;
-            }
             else
             {
-                lLoggedIn.Text = "Zalogowano jako <b>" + UserHelper.getUsername(Session["usertoken"].ToString()) + "</b>";
-                lbToAdmin.Visible = false;
-                lbToLogin.Visible = false;
-                bLogout.Visible = true;
-                lbToRegister.Visible = false;
-                lbToLogin2.Visible = false;
+                Response.Redirect("MainForm.aspx");
             }
 
             if (Session["basket"] == null)
