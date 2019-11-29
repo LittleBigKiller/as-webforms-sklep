@@ -101,6 +101,7 @@
     <Content Include="assets\css\common\footerStyle.css" />
     <Content Include="assets\css\common\headerStyle.css" />
     <Content Include="assets\css\BasketForm\mainStyle.css" />
+    <Content Include="assets\css\LoginPage\mainStyle.css" />
     <Content Include="assets\css\MainPage\mainStyle.css" />
     <Content Include="assets\css\BasketForm\productStyle.css" />
     <Content Include="assets\css\MainPage\productStyle.css" />

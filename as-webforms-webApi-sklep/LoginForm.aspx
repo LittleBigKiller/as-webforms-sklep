@@ -5,9 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Logowanie</title>
-    <link href="~/assets/css/BasketForm/productStyle.css" rel="stylesheet" />
     <link href="~/assets/css/common/headerStyle.css" rel="stylesheet" />
-    <link href="~/assets/css/BasketForm/mainStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/LoginPage/mainStyle.css" rel="stylesheet" />
     <link href="~/assets/css/common/footerStyle.css" rel="stylesheet" />
     <style>
         * {
@@ -49,30 +48,32 @@
             </div>
         </header>
         <main>
-            <div class="text-container">
-                <div>Login:</div>
-                <div class="warning-container">
-                    <asp:TextBox ID="tbUsername" runat="server" BackColor="#666666" BorderColor="#333333" ForeColor="White"></asp:TextBox>
-                </div>
-            </div>
-            <div class="text-container">
-                <div>Hasło:</div>
-                <div class="warning-container">
-                    <asp:TextBox ID="tbPassword" runat="server" TextMode="Password" BackColor="#666666" BorderColor="#333333" ForeColor="White"></asp:TextBox>
-                </div>
-            </div>
-            <div id="bt-container">
-                <div class="small-container">
-                    <asp:Button ID="bLogIn" runat="server" Text="Zaloguj" OnClick="bLogIn_Click" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" />
-                </div>
-                <div class="small-container">
-                    <asp:Button ID="bGoToRegister" runat="server" Text="Rejestracja" PostBackUrl="~/RegisterForm.aspx" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" />
-                </div>
-                <div class="small-container">
-                    <asp:Button ID="btToMainForm" runat="server" PostBackUrl="~/MainForm.aspx" Text="Strona główna" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" />
-                </div>
-                <div class="small-container">
-                    <asp:Label ID="lMsg" runat="server" ForeColor="Red"></asp:Label>
+            <div id="login-container">
+                    <div class="text-container">
+                        <div>Login</div>
+                        <div class="warning-container">
+                            <asp:TextBox ID="tbUsername" runat="server" BackColor="#666666" BorderColor="#333333" ForeColor="White"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="text-container">
+                        <div>Hasło</div>
+                        <div class="warning-container">
+                            <asp:TextBox ID="tbPassword" runat="server" TextMode="Password" BackColor="#666666" BorderColor="#333333" ForeColor="White"></asp:TextBox>
+                        </div>
+                    </div>
+                <div id="bt-container">
+                    <div class="small-container">
+                        <asp:Button ID="bLogIn" runat="server" Text="Zaloguj" OnClick="bLogIn_Click" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" />
+                    </div>
+                    <div class="small-container">
+                        <asp:Button ID="bGoToRegister" runat="server" Text="Rejestracja" PostBackUrl="~/RegisterForm.aspx" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" />
+                    </div>
+                    <div class="small-container">
+                        <asp:Button ID="btToMainForm" runat="server" PostBackUrl="~/MainForm.aspx" Text="Strona główna" BackColor="#666666" BorderColor="#333333" BorderStyle="Ridge" ForeColor="White" />
+                    </div>
+                    <div class="small-container">
+                        <asp:Label ID="lMsg" runat="server" ForeColor="Red"></asp:Label>
+                    </div>
                 </div>
             </div>
         </main>

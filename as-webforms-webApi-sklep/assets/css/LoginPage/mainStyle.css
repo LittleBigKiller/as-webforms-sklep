@@ -1,0 +1,55 @@
+main{
+    display:flex;
+    align-content:center;
+    justify-content:center;
+    color: white;
+    min-height: 600px;
+}
+#login-container {
+    display: flex;
+    flex-direction:column;
+    align-content: center;
+    justify-content: center;
+    width: 40%;
+    min-width: 450px;
+    max-width: 900px;
+}
+
+#login-container div{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.text-container{
+    text-align: center;
+    font-size: 26px;
+    padding-bottom: 7px;
+}
+
+.text-container *{
+    display:inline-block;
+}
+
+.text-container input{
+    width: 270px;
+    height: 24px;
+}
+
+#bt-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.small-container{
+    text-align: center;
+    display: inline-block;
+}
+
+.small-container *{
+    margin: 7px;
+    width: 170px;
+    height: 26px;
+}
+}
