@@ -116,7 +116,7 @@
                 <div id="info">
                     <p>Kontakt</p>
                     <span>Telefon: +48 123 456 789</span>
-                    <span>Mail: mirabele.sklep@gmail.com</span>
+                    <span>Mail: mirabelki.sklep@gmail.com</span>
                     <span>Adres: ul. Sklepowa 4/20, 32-137 Koszyce</span>
                 </div>
             </div>
