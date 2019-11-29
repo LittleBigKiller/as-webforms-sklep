@@ -74,6 +74,7 @@ namespace as_webforms_sklep
                     {
                         EmailHelper.UserRegisterConfirmation(tbEmail.Text, tbUsername.Text);
                         lMsg.Text = "Pomyślnie zarejestrowano.";
+                        Response.Redirect("LoginForm.aspx");
                     }
                     else
                     {
