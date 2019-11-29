@@ -42,7 +42,7 @@
                 </div>
                 <asp:Panel ID="userStatus" runat="server">
                     <asp:LinkButton ID="lbToBasket" CssClass="cart-bt" runat="server" PostBackUrl="~/BasketForm.aspx">Koszyk</asp:LinkButton>
-                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Visible="False"></asp:Label>
+                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Visible="True">Nie jesteś zalogowany</asp:Label>
                     <asp:Button ID="bLogout" CssClass="logout-bt" runat="server" OnClick="bLogout_Click" Text="Wyloguj" />
                 </asp:Panel>
 
@@ -116,7 +116,7 @@
                 <div id="info">
                     <p>Kontakt</p>
                     <span>Telefon: +48 123 456 789</span>
-                    <span>Mail: mirabele.sklep@gmail.com</span>
+                    <span>Mail: mirabelki.sklep@gmail.com</span>
                     <span>Adres: ul. Sklepowa 4/20, 32-137 Koszyce</span>
                 </div>
             </div>
