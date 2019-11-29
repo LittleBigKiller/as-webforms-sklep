@@ -14,9 +14,11 @@ namespace as_webforms_sklep
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Session["usertoken"] == null)
             {
                 //Response.Redirect("LoginForm.aspx");
+                tbEmail.Enabled = true;
                 lLoggedIn.Text = "Nie jesteś zalogowany";
                 lbToAdmin.Visible = false;
                 lbToLogin.Visible = true;
@@ -32,6 +34,7 @@ namespace as_webforms_sklep
                 bLogout.Visible = true;
                 lbToRegister.Visible = false;
                 lbToLogin2.Visible = false;
+                tbEmail.Text = UserHandler.getUserData(Session["usertoken"].ToString()).Rows[0]["email"].ToString();
             }
             else
             {
@@ -41,6 +44,7 @@ namespace as_webforms_sklep
                 bLogout.Visible = true;
                 lbToRegister.Visible = false;
                 lbToLogin2.Visible = false;
+                tbEmail.Text = UserHandler.getUserData(Session["usertoken"].ToString()).Rows[0]["email"].ToString();
             }
 
             if (Session["basket"] == null)
