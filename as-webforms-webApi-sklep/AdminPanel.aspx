@@ -17,7 +17,11 @@
 </head>
 <body style="background-color: #000000; color: #ffffff">
     <form id="form1" runat="server">
-        <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="MainForm.aspx">Powrót do Main.</asp:LinkButton>
+        <header>
+            <h1>PANEL ADMINISTRACYJNY </h1>
+            <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="MainForm.aspx">Powrót do Main.</asp:LinkButton>
+
+        </header>
         <br />
         <asp:Label ID="lTest" runat="server" ForeColor="Red"></asp:Label>
         <div style="display: flex; justify-content: space-evenly; align-items: flex-start; flex-direction: row;">
