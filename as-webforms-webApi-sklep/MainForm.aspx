@@ -81,9 +81,8 @@
                                     <div class="prod-spec">
                                         <p class="spec-title">Specyfikacja</p>
                                         <p class="spec-text">Kategoria: <%# as_webforms_sklep.DatabaseHandler.selectQuery("SELECT name FROM product_categories WHERE id LIKE '" + Eval("category").ToString() + "'").Rows[0]["name"] %></p>
-                                        <p class="spec-text">Nazwa: <%# Eval("name") %></p>
                                         <p class="spec-text">
-                                            Opis: <%# Eval("description") %>
+                                           <span class="desc-box"> Opis: <%# Eval("description") %> </span>
                                         </p>
                                         <p class="spec-text">Dostawca: <%# Eval("supplier") %></p>
                                     </div>
@@ -126,7 +125,7 @@
                     <span>Adres: ul. Sklepowa 4/20, 32-137 Koszyce</span>
                 </div>
             </div>
-            <div id="copyright">© by papaj</div>
+            <div id="copyright">© by mirabelki</div>
         </footer>
     </form>
 </body>
