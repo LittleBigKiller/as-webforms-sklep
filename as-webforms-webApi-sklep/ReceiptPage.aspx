@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            Wykonano zamówienie. (może tutaj jakieś podsumowanie co zamówiono itd.)<br />
+            Pomyślnie złożono zamówienie. Potwierdzenie zostało wysłane na podany adres email<br />
             <a href="MainForm.aspx">Powrót do strony głównej</a>
         </div>
     </form>
