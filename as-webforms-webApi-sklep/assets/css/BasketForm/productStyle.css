@@ -3,8 +3,9 @@
     color: white;
     display: flex;
     width: 100%;
-    min-width: 925px;
-    height: 25vh;
+    min-width: 650px;
+    max-width: 1400px;
+    height: 255px;
 }
 
 .prod-img-box {
@@ -17,8 +18,8 @@
 }
 
 .prod-img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: 245px;
 }
 
 .prod-info {
@@ -47,18 +48,34 @@
 }
 
 .prod-spec {
+    width: 70%;
     margin-left: 5px;
     min-width: 400px;
 }
 
 .spec-title {
-    font-size: 150%;
+    font-size: 110%;
     text-decoration: underline;
 }
 
 .spec-text {
     padding-top: 10px;
 }
+
+.desc-box {
+    white-space: nowrap;
+    display: block;
+    height: 25%;
+    max-height: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    .desc-box:hover {
+        overflow: scroll;
+        white-space: normal;
+        overflow-x: hidden
+    }
 
 .prod-buy-box {
     display: flex;

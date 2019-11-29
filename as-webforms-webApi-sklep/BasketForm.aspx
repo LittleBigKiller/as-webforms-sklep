@@ -31,7 +31,7 @@
                 <div id="menu-list-box">
                     <ul id="menu-list">
                         <li>
-                            <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/MainForm.aspx">Strona główna</asp:LinkButton></li>
+                            <asp:LinkButton ID="lbToMainPage" runat="server" PostBackUrl="~/MainForm.aspx">Strona główna</asp:LinkButton></li>
                         <li>
                             <asp:LinkButton ID="lbToRegister" runat="server" PostBackUrl="~/RegisterForm.aspx" Visible="True">Rejestracja</asp:LinkButton></li>
                         <li>
@@ -69,7 +69,7 @@
                                         <p class="spec-text">Kategoria: <%# as_webforms_sklep.DatabaseHandler.selectQuery("SELECT name FROM product_categories WHERE id LIKE '" + Eval("category").ToString() + "'").Rows[0]["name"] %></p>
                                         <p class="spec-text">Nazwa: <%# Eval("name") %></p>
                                         <p class="spec-text">
-                                            Opis: <%# Eval("description") %>
+                                            <span class="desc-box"> Opis: <%# Eval("description") %> </span>
                                         </p>
                                         <p class="spec-text">Dostawca: <%# Eval("supplier") %></p>
                                     </div>
@@ -109,7 +109,7 @@
                     </div>
                     <div id="sklep">
                         <p>Sklep</p>
-                        <asp:LinkButton ID="lbToMainPage" runat="server" PostBackUrl="~/MainForm.aspx">Strona główna</asp:LinkButton>
+                        <asp:LinkButton ID="lbToMainPage2" runat="server" PostBackUrl="~/MainForm.aspx">Strona główna</asp:LinkButton>
                         <asp:LinkButton ID="lbToContact" runat="server" PostBackUrl="~/MainForm.aspx">Kontakt</asp:LinkButton>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                     <span>Adres: ul. Sklepowa 4/20, 32-137 Koszyce</span>
                 </div>
             </div>
-            <div id="copyright">© by papaj</div>
+            <div id="copyright">© by mirabelki</div>
         </footer>
     </form>
 </body>

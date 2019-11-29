@@ -11,6 +11,7 @@ main {
 }
 
 #products {
+    min-height: 600px;
     width: 84%;
     display: flex;
     align-content: center;

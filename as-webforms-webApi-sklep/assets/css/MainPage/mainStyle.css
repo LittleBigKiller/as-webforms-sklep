@@ -24,3 +24,16 @@ main {
     border-bottom: 1px solid #888;
     border-collapse: collapse;
 }
+
+.category-bt {
+    width:100%;
+    text-align: center;
+    min-height: 40px;
+    font-size: 24px;
+    list-style: none;
+}
+
+.category-bt a{
+    text-decoration: none;
+    color: white;
+}
