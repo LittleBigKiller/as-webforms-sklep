@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -44,11 +45,16 @@ namespace as_webforms_sklep
                 rProducts.DataSource = DatabaseHandler.selectTable("product_info");
                 rProducts.DataBind();
 
-                lvCategories.DataSource = DatabaseHandler.selectTable("product_categories");
+                DataTable cats = DatabaseHandler.selectTable("product_categories");
+                DataRow catAll = cats.NewRow();
+                catAll["name"] = "Wszystkie";
+                cats.Rows.InsertAt(catAll, 0);
+
+                lvCategories.DataSource = cats;
                 lvCategories.DataBind();
             }
 
-            if(Request.QueryString["category"] != null)
+            if(Request.QueryString["category"] != null && Request.QueryString["category"] != "Wszystkie")
             {
                 string category = Request.QueryString["category"];
                 var catQuery = DatabaseHandler.selectQuery("SELECT id FROM product_categories WHERE name LIKE '" + category + "'");
