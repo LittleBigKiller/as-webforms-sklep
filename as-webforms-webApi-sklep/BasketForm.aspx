@@ -5,10 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Koszyk</title>
-    <link href="~/assets/css/MainPage/productStyle.css" rel="stylesheet" />
-    <link href="~/assets/css/MainPage/headerStyle.css" rel="stylesheet" />
-    <link href="~/assets/css/MainPage/mainStyle.css" rel="stylesheet" />
-    <link href="~/assets/css/MainPage/footerStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/BasketForm/productStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/BasketForm/headerStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/BasketForm/mainStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/BasketForm/footerStyle.css" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -30,7 +30,8 @@
             <div id="menu">
                 <div id="menu-list-box">
                     <ul id="menu-list">
-                        <li>Produkty </li>
+                        <li>
+                            <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/MainForm.aspx">Strona główna</asp:LinkButton></li>
                         <li>
                             <asp:LinkButton ID="lbToRegister" runat="server" PostBackUrl="~/RegisterForm.aspx" Visible="True">Rejestracja</asp:LinkButton></li>
                         <li>
@@ -39,11 +40,12 @@
                             <asp:LinkButton ID="lbToLogin" runat="server" PostBackUrl="~/LoginForm.aspx">Zaloguj się</asp:LinkButton></li>
                     </ul>
                 </div>
-                <div id="user-status">
+                <asp:Panel ID="userStatus" runat="server">
                     <asp:LinkButton ID="lbToBasket" CssClass="cart-bt" runat="server" PostBackUrl="~/BasketForm.aspx">Koszyk</asp:LinkButton>
-                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Text="Nie jesteś zalogowany."></asp:Label>
+                    <asp:Label ID="lLoggedIn" CssClass="logged-as" runat="server" Visible="False"></asp:Label>
                     <asp:Button ID="bLogout" CssClass="logout-bt" runat="server" OnClick="bLogout_Click" Text="Wyloguj" />
-                </div>
+                </asp:Panel>
+
             </div>
         </header>
         <main>
@@ -86,11 +88,13 @@
                 </asp:Repeater>
             </div>
             <div>
-                <asp:Label ID="lTotalPrice" runat="server" Text="Suma:"></asp:Label>
-                <asp:TextBox ID="tbEmail" runat="server" TextMode="Email" BackColor="#666666" BorderColor="#333333" ForeColor="White" Enabled="False"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="tbEmail" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="EmailValidator" runat="server" ControlToValidate="tbEmail" ErrorMessage="Wpisz poprawny adres email." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic"></asp:RegularExpressionValidator>
-                <asp:Button ID="bOrder" runat="server" OnClick="bOrder_Click" Text="Złóż zamówienie" />
+                <div id="order-box">
+                    <asp:Label ID="lTotalPrice" runat="server" Text="Suma:"></asp:Label>
+                    <asp:TextBox ID="tbEmail" runat="server" TextMode="Email" BackColor="#666666" BorderColor="#333333" ForeColor="White" Enabled="False"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="tbEmail" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="EmailValidator" runat="server" ControlToValidate="tbEmail" ErrorMessage="Wpisz poprawny adres email." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic"></asp:RegularExpressionValidator>
+                    <asp:Button ID="bOrder" runat="server" OnClick="bOrder_Click" Text="Złóż zamówienie" />
+                </div>
             </div>
         </main>
         <footer>
@@ -112,7 +116,7 @@
                 <div id="info">
                     <p>Kontakt</p>
                     <span>Telefon: +48 123 456 789</span>
-                    <span>Mail: sklepinternetowy@sklep.pl</span>
+                    <span>Mail: mirabele.sklep@gmail.com</span>
                     <span>Adres: ul. Sklepowa 4/20, 32-137 Koszyce</span>
                 </div>
             </div>

@@ -1,0 +1,66 @@
+header {
+    color: white;
+    min-width: 1350px;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #888;
+}
+
+#title img {
+    width: 100%;
+    filter: blur(4px);
+}
+
+#menu {
+    padding: 5px 12px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#menu-list {
+    width: 40%;
+    min-width: 650px;
+}
+
+    #menu-list li {
+        display: inline-block;
+    }
+
+        #menu-list li a {
+            text-decoration: none;
+            color: white;
+        }
+
+#userStatus {
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
+    min-width: 200px;
+}
+
+    #userStatus a {
+        text-decoration: none;
+        color: white;
+    }
+
+.cart-bt {
+    text-align: right;
+    flex: 1;
+    width: auto;
+}
+
+.logged-as {
+    text-align: center;
+    flex: 2;
+}
+
+.logout-bt {
+    flex: 1;
+}
+
+#list-cats-box {
+    display: none;
+}
