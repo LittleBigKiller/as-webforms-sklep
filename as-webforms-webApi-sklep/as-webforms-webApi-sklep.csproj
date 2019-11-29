@@ -139,8 +139,8 @@
     <Compile Include="BasketForm.aspx.designer.cs">
       <DependentUpon>BasketForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BasketItem.cs" />
-    <Compile Include="DatabaseHandler.cs" />
+    <Compile Include="ShopItem.cs" />
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,8 +173,8 @@
     <Compile Include="RegisterForm.aspx.designer.cs">
       <DependentUpon>RegisterForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="services\EmailService.cs" />
-    <Compile Include="UserHandler.cs" />
+    <Compile Include="services\EmailHelper.cs" />
+    <Compile Include="UserHelper.cs" />
     <Compile Include="Verify.aspx.cs">
       <DependentUpon>Verify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -26,31 +26,31 @@ namespace as_webforms_sklep
                 lbToRegister.Visible = true;
                 lbToLogin2.Visible = true;
             }
-            else if (UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHandler.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
+            else if (UserHelper.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ADMIN || UserHelper.getAccessLevel(Session["usertoken"].ToString()) == AccessLevel.ROOT)
             {
-                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHelper.getUsername(Session["usertoken"].ToString()) + "</b>";
                 lbToAdmin.Visible = true;
                 lbToLogin.Visible = false;
                 bLogout.Visible = true;
                 lbToRegister.Visible = false;
                 lbToLogin2.Visible = false;
-                tbEmail.Text = UserHandler.getUserData(Session["usertoken"].ToString()).Rows[0]["email"].ToString();
+                tbEmail.Text = UserHelper.getUserData(Session["usertoken"].ToString()).Rows[0]["email"].ToString();
             }
             else
             {
-                lLoggedIn.Text = "Zalogowano jako <b>" + UserHandler.getUsername(Session["usertoken"].ToString()) + "</b>";
+                lLoggedIn.Text = "Zalogowano jako <b>" + UserHelper.getUsername(Session["usertoken"].ToString()) + "</b>";
                 lbToAdmin.Visible = false;
                 lbToLogin.Visible = false;
                 bLogout.Visible = true;
                 lbToRegister.Visible = false;
                 lbToLogin2.Visible = false;
-                tbEmail.Text = UserHandler.getUserData(Session["usertoken"].ToString()).Rows[0]["email"].ToString();
+                tbEmail.Text = UserHelper.getUserData(Session["usertoken"].ToString()).Rows[0]["email"].ToString();
             }
 
             if (Session["basket"] == null)
             {
                 Debug.WriteLine("Create new basket");
-                Session["basket"] = new List<BasketItem>();
+                Session["basket"] = new List<ShopItem>();
             }
 
             if (!IsPostBack)
@@ -67,7 +67,7 @@ namespace as_webforms_sklep
         {
             if (Session["usertoken"] != null)
             {
-                UserHandler.tryToLogOut(Session["usertoken"].ToString());
+                UserHelper.tryToLogOut(Session["usertoken"].ToString());
                 Session["usertoken"] = null;
                 Response.Redirect("MainForm.aspx");
             }
@@ -75,18 +75,18 @@ namespace as_webforms_sklep
 
         protected void calculateBasketItemCount()
         {
-            List<BasketItem> basketList;
+            List<ShopItem> basketList;
             if (Session["basket"] == null)
             {
-                basketList = new List<BasketItem>();
+                basketList = new List<ShopItem>();
             }
             else
             {
-                basketList = (List<BasketItem>)Session["basket"];
+                basketList = (List<ShopItem>)Session["basket"];
             }
 
             int totalAmount = 0;
-            foreach (BasketItem basketItem in basketList)
+            foreach (ShopItem basketItem in basketList)
             {
                 totalAmount += basketItem.Amount;
             }
@@ -98,20 +98,20 @@ namespace as_webforms_sklep
 
         protected DataTable createProductList()
         {
-            List<BasketItem> basketList;
+            List<ShopItem> basketList;
             if (Session["basket"] == null)
             {
-                basketList = new List<BasketItem>();
+                basketList = new List<ShopItem>();
             }
             else
             {
-                basketList = (List<BasketItem>)Session["basket"];
+                basketList = (List<ShopItem>)Session["basket"];
             }
 
             DataTable dt = new DataTable();
-            foreach (BasketItem basketItem in basketList)
+            foreach (ShopItem basketItem in basketList)
             {
-                DataTable tempDt = DatabaseHandler.selectQuery("SELECT * FROM product_info WHERE id = " + basketItem.ProductId);
+                DataTable tempDt = DatabaseHelper.selectQuery("SELECT * FROM product_info WHERE id = " + basketItem.ProductId);
                 tempDt.Columns.Add("amount", typeof(int));
                 tempDt.Rows[0]["amount"] = basketItem.Amount;
 
@@ -123,18 +123,18 @@ namespace as_webforms_sklep
 
         protected void calculateTotalPrice()
         {
-            List<BasketItem> basketList;
+            List<ShopItem> basketList;
             if (Session["basket"] == null)
             {
-                basketList = new List<BasketItem>();
+                basketList = new List<ShopItem>();
             }
             else
             {
-                basketList = (List<BasketItem>)Session["basket"];
+                basketList = (List<ShopItem>)Session["basket"];
             }
 
             double totalPrice = 0;
-            foreach (BasketItem basketItem in basketList)
+            foreach (ShopItem basketItem in basketList)
             {
                 totalPrice += basketItem.Amount * basketItem.Price;
             }
@@ -149,17 +149,17 @@ namespace as_webforms_sklep
             if (e.CommandName == "changeInBasket")
             {
                 Debug.WriteLine("changeInBasket");
-                List<BasketItem> basketList;
+                List<ShopItem> basketList;
                 if (Session["basket"] == null)
                 {
-                    basketList = new List<BasketItem>();
+                    basketList = new List<ShopItem>();
                 }
                 else
                 {
-                    basketList = (List<BasketItem>)Session["basket"];
+                    basketList = (List<ShopItem>)Session["basket"];
                 }
 
-                BasketItem basketItem = basketList.Find(item => item.ProductId == (e.CommandArgument.ToString()));
+                ShopItem basketItem = basketList.Find(item => item.ProductId == (e.CommandArgument.ToString()));
 
                 int amountToSet = 0;
                 TextBox tbAmount = (TextBox)e.Item.FindControl("tbAmount");
@@ -180,17 +180,17 @@ namespace as_webforms_sklep
             else if (e.CommandName == "removeFromBasket")
             {
                 Debug.WriteLine("removeFromBasket");
-                List<BasketItem> basketList;
+                List<ShopItem> basketList;
                 if (Session["basket"] == null)
                 {
-                    basketList = new List<BasketItem>();
+                    basketList = new List<ShopItem>();
                 }
                 else
                 {
-                    basketList = (List<BasketItem>)Session["basket"];
+                    basketList = (List<ShopItem>)Session["basket"];
                 }
 
-                BasketItem basketItem = basketList.Find(item => item.ProductId == (e.CommandArgument.ToString()));
+                ShopItem basketItem = basketList.Find(item => item.ProductId == (e.CommandArgument.ToString()));
 
                 basketList.Remove(basketItem);
                 rBasket.DataSource = createProductList();
@@ -205,9 +205,9 @@ namespace as_webforms_sklep
         {
             if (!IsValid) return;
 
-            if (DatabaseHandler.createOrder(Session["usertoken"] == null ? "" : (string)Session["usertoken"], (List<BasketItem>)Session["basket"]))
+            if (DatabaseHelper.createOrder(Session["usertoken"] == null ? "" : (string)Session["usertoken"], (List<ShopItem>)Session["basket"]))
             {
-                EmailService.ProductBought(tbEmail.Text, (List<BasketItem>)Session["basket"]);
+                EmailHelper.ProductBought(tbEmail.Text, (List<ShopItem>)Session["basket"]);
                 Session["basket"] = null;
                 Response.Redirect("ReceiptPage.aspx");
             }

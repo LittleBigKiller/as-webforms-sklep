@@ -12,7 +12,7 @@ namespace as_webforms_sklep
 
         protected void bLogIn_Click(object sender, EventArgs e)
         {
-            string token = UserHandler.tryToLogIn(tbUsername.Text, tbPassword.Text);
+            string token = UserHelper.tryToLogIn(tbUsername.Text, tbPassword.Text);
             if(token == "fail")
             {
                 lMsg.Text = "Nieprawidłowy login lub hasło.";

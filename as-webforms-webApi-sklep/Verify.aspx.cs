@@ -19,7 +19,7 @@ namespace as_webforms_webApi_sklep
             {
                 string activationCode = !string.IsNullOrEmpty(Request.QueryString["ActivationCode"]) ? Request.QueryString["ActivationCode"] : Guid.Empty.ToString();
                 ltMessage.Text = "Your account has been verified succesfully";
-                DatabaseHandler.updateVerificationStatus(activationCode);
+                DatabaseHelper.updateVerificationStatus(activationCode);
             }
         }
     }

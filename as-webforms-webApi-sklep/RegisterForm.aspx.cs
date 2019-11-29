@@ -15,15 +15,15 @@ namespace as_webforms_sklep
         {
             if(IsValid)
             {
-                var query = DatabaseHandler.selectQuery("SELECT username FROM users WHERE username LIKE '" + tbUsername.Text + "'");
+                var query = DatabaseHelper.selectQuery("SELECT username FROM users WHERE username LIKE '" + tbUsername.Text + "'");
                 if(query.Rows.Count == 1)
                 {
                     lMsg.Text = "Nazwa użytkownika zajęta.";
                 } else
                 {
-                    if (UserHandler.tryToRegister(tbUsername.Text, tbPassword.Text, tbEmail.Text, new string[3] { tbFirstName.Text, tbLastName.Text, tbAddress.Text}))
+                    if (UserHelper.tryToRegister(tbUsername.Text, tbPassword.Text, tbEmail.Text, new string[3] { tbFirstName.Text, tbLastName.Text, tbAddress.Text}))
                     {
-                        EmailService.UserRegisterConfirmation(tbEmail.Text, tbUsername.Text);
+                        EmailHelper.UserRegisterConfirmation(tbEmail.Text, tbUsername.Text);
                         lMsg.Text = "Pomyślnie zarejestrowano.";
                     } else
                     {
