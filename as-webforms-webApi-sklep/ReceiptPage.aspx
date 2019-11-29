@@ -7,11 +7,9 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
-            Pomyślnie złożono zamówienie. Potwierdzenie zostało wysłane na podany adres email<br />
-            <a href="MainForm.aspx">Powrót do strony głównej</a>
-        </div>
-    </form>
+    <div>
+        Pomyślnie złożono zamówienie. Potwierdzenie zostało wysłane na podany adres email<br />
+        <a href="MainForm.aspx">Powrót do strony głównej</a>
+    </div>
 </body>
 </html>

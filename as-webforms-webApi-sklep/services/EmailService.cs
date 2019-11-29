@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -11,13 +12,35 @@ namespace as_webforms_sklep.services
     public class EmailService
     {
 
-        internal static void ProductBought(string email)
+        internal static void ProductBought(string email, List<BasketItem> orderList)
         {
             using (MailMessage mm = new MailMessage("mirabelki.sklep@gmail.com", email))
             {
                 mm.Subject = "Zamówienie - Sklep Mirabelki";
-                mm.Body = "Dziękujemy za zakupy w naszym sklepie, zamówienie zostało przyjęte";
-                mm.IsBodyHtml = false;
+
+                float total = 0;
+                string body = "Dziękujemy za zakupy w naszym sklepie, zamówienie zostało przyjęte<br/>";
+                body += "<table border=1>";
+                body += "<tr><th>Nazwa Produktu</th><th>Ilość</th><th>Cena Jednostkowa</th></tr>";
+
+                DataTable dt = new DataTable();
+                foreach (BasketItem basketItem in orderList)
+                {
+                    DataTable tempDt = DatabaseHandler.selectQuery("SELECT * FROM product_info WHERE id = " + basketItem.ProductId);
+
+                    body += "<tr>";
+                    body += "<td>" + tempDt.Rows[0]["name"].ToString() + "</td>";
+                    body += "<td>" + basketItem.Amount + "</td>";
+                    body += "<td>" + tempDt.Rows[0]["price"].ToString() + " zł</td>";
+
+                    total += float.Parse(tempDt.Rows[0]["price"].ToString()) * basketItem.Amount;
+                    body += "</tr>";
+                }
+
+                body += "<tr><th colspan=2>SUMA</th><th>" + total.ToString("N2") + " zł</th></tr>";
+                body += "</table>";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;

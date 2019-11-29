@@ -205,7 +205,7 @@ namespace as_webforms_sklep
 
             if (DatabaseHandler.createOrder(Session["usertoken"] == null ? "" : (string)Session["usertoken"], (List<BasketItem>)Session["basket"]))
             {
-                EmailService.ProductBought(tbEmail.Text);
+                EmailService.ProductBought(tbEmail.Text, (List<BasketItem>)Session["basket"]);
                 Session["basket"] = null;
                 Response.Redirect("ReceiptPage.aspx");
             }
