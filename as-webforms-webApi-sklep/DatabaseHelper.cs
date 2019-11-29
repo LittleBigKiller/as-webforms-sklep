@@ -9,10 +9,10 @@ namespace as_webforms_sklep
     public static class DatabaseHelper
     {
         private const string connString =
-               "SERVER=inf16.tl.krakow.pl;" +
-               "DATABASE=mpiwowarski;" +
-               "UID=mpiwowarski;" +
-               "PASSWORD=mpiwowarski;";
+               "SERVER=localhost;" +
+               "DATABASE=mirabelki;" +
+               "UID=root;" +
+               "PASSWORD=;";
 
         private static MySqlConnection connect()
         {
